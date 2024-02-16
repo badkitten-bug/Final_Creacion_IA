@@ -1,0 +1,335 @@
+﻿@model ConsultaOpenAI
+
+<style>
+    #principal {
+        display: flex;
+        height: 1000px;
+        margin-top: 50px;
+        height: 80vh;
+    }
+
+    #izquierda {
+        background-color: white;
+        border-right: 1px solid #ccc;
+        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
+        width: 40%;
+        padding: 50px;
+    }
+
+    #derecha {
+        background-color: #f0f0f0;
+        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        padding-left: 20px;
+        padding-top: 20px;
+        padding-bottom: 8vh;
+        padding-right: 30px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"], textarea {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        /*margin-bottom: 10px;*/
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 20px; /* Agregamos margen a la derecha */
+        max-height: 95%;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    #botones {
+        text-align: center;
+    }
+
+    textarea {
+        width: 100%;
+        height: calc(100% - 50px);
+    }
+</style>
+
+<div id="principal">
+    <div id="izquierda">
+        <form id="generar-cuento-form" asp-controller="Generar" asp-action="Cuento" method="post">
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="Titulo" style="margin-bottom:5px;"><b>Título</b></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="Competencia" style="margin-bottom:5px;"><b>Competencia</b></label>
+                <input asp-for="Competencia" class="form-control" />
+                <span asp-validation-for="Competencia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="NivelGrado" style="margin-bottom:5px;"><b>Nivel de Grado</b></label>
+                <select asp-for="NivelGrado" asp-items="ViewBag.NivelesGrado" class="form-control">
+                    @if(User.Claims.FirstOrDefault(c => c.Type == "PermisoInicial")?.Value == "True")
+                    {
+                        <option value="0 a 2 años" class="form-control">0 a 2 años</option>
+                        <option value="3 a 5 años" class="form-control">3 a 5 años</option>
+                    }
+                    @if(User.Claims.FirstOrDefault(c => c.Type == "PermisoPrimaria")?.Value == "True")
+                    {
+                        <option value="Primero de Primaria" class="form-control">Primero de Primaria</option>
+                        <option value="Segundo de Primaria" class="form-control">Segundo de Primaria</option>
+                        <option value="Tercero de Primaria" class="form-control">Tercero de Primaria</option>
+                        <option value="Cuarto de Primaria" class="form-control">Cuarto de Primaria</option>
+                        <option value="Quinto de Primaria" class="form-control">Quinto de Primaria</option>
+                        <option value="Sexto de Primaria" class="form-control">Sexto de Primaria</option>
+                    }
+                    @if(User.Claims.FirstOrDefault(c => c.Type == "PermisoSecundaria")?.Value == "True")
+                    {
+                        <option value="Primero de Secundaria" class="form-control">Primero de Secundaria</option>
+                        <option value="Segundo de Secundaria" class="form-control">Segundo de Secundaria</option>
+                        <option value="Tercero de Secundaria" class="form-control">Tercero de Secundaria</option>
+                        <option value="Cuarto de Secundaria" class="form-control">Cuarto de Secundaria</option>
+                        <option value="Quinto de Secundaria" class="form-control">Quinto de Secundaria</option>
+                    }
+                </select>
+                <span asp-validation-for="NivelGrado" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="Objetivo" style="margin-bottom:5px;"><b>Objetivo</b></label>
+                <input asp-for="Objetivo" class="form-control" />
+                <span asp-validation-for="Objetivo" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-secondary" style="margin-top:10px; background-color: #f2a938; border-color: #f2a938;">Generar Cuento</button>
+
+
+        </form>
+
+        <div id="cargando" style="display: none; text-align: center;">
+            <img src="~/IndexAssets/images/loading-7528_256.gif" style="width: 60px; height: 60px;" />
+        </div>
+
+    </div>
+    <div id="derecha">
+        <div id="botones">
+            <button id="btnMostrarResultado1" class="btn-secondary">Cuento</button>
+            <button id="btnMostrarResultado2" class="btn-secondary">Estrategias</button>
+            <button id="btnMostrarResultado3" class="btn-secondary">Preguntas</button>
+            <button id="btnExportar" class="btn-secondary" style="float: right;" ">Exportar</button>
+        </div>
+        <textarea id="resultado" readonly>@System.Web.HttpUtility.HtmlDecode(ViewBag.Resultado)</textarea>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function decodeEntities(encodedString) {
+        var textArea = document.createElement('textarea');
+        textArea.innerHTML = encodedString.replace(/<br>/g, '\n');
+        // textArea.innerHTML = encodedString;
+        console.log(textArea.value);
+        return textArea.value;
+    }
+
+    $(document).ready(function () {
+        $("#btnMostrarResultado1").click(function () {
+            $("#resultado").val(decodeEntities('@ViewBag.Resultado'));
+        });
+
+        $("#btnMostrarResultado2").click(function () {
+            $("#resultado").val(decodeEntities('@ViewBag.Resultado2'));
+        });
+
+        $("#btnMostrarResultado3").click(function () {
+            $("#resultado").val(decodeEntities('@ViewBag.Resultado3'));
+        });
+
+        $("#generar-cuento-form").submit(function () {
+            mostrarCargando();
+        });
+
+        function mostrarCargando() {
+            $("#cargando").show();
+        }
+    });
+
+    $("#btnExportar").click(function () {
+        downloadDocx();
+    });
+
+    function downloadDocx() {
+        console.log('@ViewBag.Resultado3');
+        const header = new docx.Paragraph({
+            children: [new docx.TextRun(
+            {
+                    text: "Sesión de Aprendizaje",
+                    size: 36*2,
+                    font: "Berlin Sans FB Demi",
+                    color: "FFD700"
+            }), new docx.TextRun({ break: 1 })],
+        });
+
+        const paragraph = new docx.Paragraph({
+            children: [new docx.TextRun(
+                {
+                    text: "CUENTO",
+                    size: 16 * 2,
+                    font: "Calibri (Cuerpo)",
+                    color: "6EADFF"
+                }),
+                new docx.TextRun({ break: 1 })],
+        });
+        const paragraphscuento = decodeEntities('@ViewBag.Resultado').split('\n');
+        let paragraphsarraycuento  = [];
+
+        paragraphscuento.forEach((paragraphText) => {
+            paragraphsarraycuento.push(new docx.TextRun(
+                {
+                    text: paragraphText,
+                    font: "arial",
+                    size: 22,
+                    break: 1
+                }))
+        });
+        paragraphsarraycuento.push(new docx.TextRun({ break: 3 }));
+
+        const paragraph2 = new docx.Paragraph({
+            children: paragraphsarraycuento,
+        });
+
+        const paragraph3 = new docx.Paragraph({
+            children: [new docx.TextRun(
+                {
+                    text: "ESTRATEGIAS",
+                    size: 16 * 2,
+                    font: "Calibri (Cuerpo)",
+                    color: "6EADFF"
+                }), 
+                new docx.TextRun({ break: 1 })],
+        });
+
+        const paragraphsestra = decodeEntities('@ViewBag.Resultado2').split('\n');
+        let paragraphsarrayestra = [];
+
+        paragraphsestra.forEach((paragraphText) => {
+            paragraphsarrayestra.push(new docx.TextRun(
+                {
+                    text: paragraphText,
+                    font: "arial",
+                    size: 22,
+                    break: 1
+                }))
+        });
+        paragraphsarrayestra.push(new docx.TextRun({ break: 3 }));
+
+        const paragraph4 = new docx.Paragraph({
+            children: paragraphsarrayestra,
+        });
+
+        const paragraph5 = new docx.Paragraph({
+            children: [new docx.TextRun(
+                {
+                    text: "PREGUNTAS",
+                    size: 16 * 2,
+                    font: "Calibri (Cuerpo)",
+                    color: "6EADFF"
+                }), new docx.TextRun({ break: 1 })],
+        });
+        
+        const paragraphs = decodeEntities('@ViewBag.Resultado3').split('\n');
+        let paragraphsarray = [];
+        
+        paragraphs.forEach((paragraphText) => {
+            paragraphsarray.push(new docx.TextRun(
+            {
+                text: paragraphText,
+                font: "arial",
+                size: 22,
+                break: 1
+            }))
+        });
+        paragraphsarray.push(new docx.TextRun({ break: 3 }));
+
+        const paragraph6 = new docx.Paragraph({
+            children: paragraphsarray,
+        });
+        
+        // const text = "CUENTO:\n\n\n" + decodeEntities('@ViewBag.Resultado') + "\n\n\n\nESTRATEGIAS:\n\n\n" + decodeEntities('@ViewBag.Resultado2') + "\n\n\n\nPREGUNTAS:\n\n\n" + decodeEntities('@ViewBag.Resultado3');
+
+        const borderStyle = docx.BorderStyle.Single;
+        const borderColor = "#FFD700";
+
+        const doc = new docx.Document({
+            sections: [{
+                properties: {
+                    page: {
+                        borders: {
+                            pageBorderBottom: {
+                                style: docx.BorderStyle.THIN_THICK_THIN_SMALL_GAP,
+                                size: 6 * 8, //2pt;
+                                color: 'FFD700',
+                                space: 30
+                            },
+                            pageBorderLeft: {
+                                style: docx.BorderStyle.THIN_THICK_THIN_SMALL_GAP,
+                                size: 6 * 8, //1pt;
+                                color: 'FFD700',
+                                space: 30
+                            },
+                            pageBorderRight: {
+                                style: docx.BorderStyle.THIN_THICK_THIN_SMALL_GAP,
+                                size: 6 * 8, //1pt;
+                                color: 'FFD700',
+                                space: 30
+                            },
+                            pageBorderTop: {
+                                style: docx.BorderStyle.THIN_THICK_THIN_SMALL_GAP,
+                                size: 6 * 8, //1pt;
+                                color: 'FFD700',
+                                space: 30
+                            },
+
+                            pageBorders: {
+                                display: "allPages", //https://docx.js.org/api/enums/PageBorderDisplay.html
+                                offsetFrom: "text", //https://docx.js.org/api/enums/PageBorderOffsetFrom.html
+                                zOrder: "front" //https://docx.js.org/api/enums/PageBorderZOrder.html
+                            }
+                        }
+                    },
+                },
+                children: [
+                    header, paragraph, paragraph2, paragraph3, paragraph4, paragraph5, paragraph6
+                ],
+            }]
+        });
+
+        docx.Packer.toBlob(doc).then(blob => {
+            saveAs(blob, "Sesión de Aprendizaje");
+            // console.log("Document created successfully");
+        });
+    }
+
+</script>

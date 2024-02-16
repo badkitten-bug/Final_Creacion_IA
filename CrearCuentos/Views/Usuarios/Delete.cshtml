@@ -1,0 +1,97 @@
+﻿@model CrearCuentos.Models.Usuario
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="container">
+    <main role="main">
+<h1>Eliminar</h1>
+
+<h3>¿Está seguro que desea eliminar el registro?</h3>
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre Completo
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombreCompletos)
+        </dd>
+        <dt class="col-sm-2">
+            DNI
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dni)
+        </dd>
+        <dt class="col-sm-2">
+            Nombre de Usuario
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombreDeUsuario)
+        </dd>
+        <dt class="col-sm-2">
+            Correo Electrónico
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Correo)
+        </dd>
+        <dt class="col-sm-2">
+            Contraseña
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Contraseña)
+        </dd>
+        <dt class="col-sm-2">
+            Estado
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Estado == 1)
+            {
+                <select disabled class="form-control" style="width: 150px;">
+                    <option value="1">Activo</option>
+                </select>
+            }
+            else
+            {
+                <select disabled class="form-control" style="width: 150px;">
+                    <option value="0">Inactivo</option>
+                </select>
+            }
+        </dd>
+
+        <dd class="col-sm-10">
+            <div class="form-check">
+                <input asp-for="PermisoInicial" type="checkbox" disabled="disabled" />
+                <label asp-for="PermisoInicial" class="control-label">Inicial</label>
+            </div>
+        </dd>
+
+        <dd class="col-sm-10">
+            <div class="form-check">
+                <input asp-for="PermisoPrimaria" type="checkbox" disabled="disabled" />
+                <label asp-for="PermisoPrimaria" class="control-label">Primaria</label>
+            </div>
+        </dd>
+        <dd class="col-sm-10">
+            <div class="form-check">
+                <input asp-for="PermisoSecundaria" type="checkbox" disabled="disabled" />
+                <label asp-for="PermisoSecundaria" class="control-label">Secundaria</label>
+            </div>
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group mb-2" style="margin-top:30px;">
+            <!-- Ajustado a mb-2 -->
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Regresar a la Lista
+            </a>
+        </div>
+    </form>
+</div>
+ </main>
+    </div>

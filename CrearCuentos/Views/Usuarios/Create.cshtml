@@ -1,0 +1,93 @@
+﻿@model CrearCuentos.Models.Usuario
+
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+<div class="container">
+    <main role="main">
+
+<h1>Crear</h1>
+
+<h4>Usuario</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="NombreCompletos" class="control-label">Nombre Completo</label>
+                <input asp-for="NombreCompletos" class="form-control" />
+                <span asp-validation-for="NombreCompletos" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Dni" class="control-label">DNI</label>
+                <input asp-for="Dni" class="form-control" />
+                <span asp-validation-for="Dni" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="NombreDeUsuario" class="control-label">Nombre de Usuario</label>
+                <input asp-for="NombreDeUsuario" class="form-control" />
+                <span asp-validation-for="NombreDeUsuario" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Correo" class="control-label">Correo Electrónico</label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Contraseña" class="control-label">Contraseña</label>
+                <input asp-for="Contraseña" class="form-control" />
+                <span asp-validation-for="Contraseña" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <div class="form-check">
+                    <input asp-for="PermisoInicial" type="checkbox" class="form-check-input" />
+                    <label asp-for="PermisoInicial" class="form-check-label">Inicial</label>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="form-check">
+                    <input asp-for="PermisoPrimaria" type="checkbox" class="form-check-input" />
+                    <label asp-for="PermisoPrimaria" class="form-check-label">Primaria</label>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="form-check">
+                    <input asp-for="PermisoSecundaria" type="checkbox" class="form-check-input" />
+                    <label asp-for="PermisoSecundaria" class="form-check-label">Secundaria</label>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Estado" class="control-label">Estado</label>
+                <select asp-for="Estado" class="form-control">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3" style="margin-top: 30px;">
+                <button type="submit" class="btn btn-dark">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-2">
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Regresar a la Lista
+    </a>
+</div>
+    </main>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

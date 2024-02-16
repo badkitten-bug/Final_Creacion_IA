@@ -1,0 +1,134 @@
+﻿@model IEnumerable<CrearCuentos.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Gestionar Usuarios";
+}
+
+@section Estilos{
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+<div class="container">
+    <main role="main">
+<br />
+<br />
+<h2>Gestionar Usuarios</h2>
+
+<div>
+    <br />
+
+    <div style="align-content: end">
+        <a asp-action="Create" class="btn btn-dark">
+            <i class="fas fa-plus"></i> Nuevo
+        </a>
+    </div>
+    <br />
+    <table id="tbl_usuarios" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Nombre Completo
+                </th>
+                <th>
+                    DNI
+                </th>
+                <th>
+                    Nombre de Usuario
+                </th>
+                <th>
+                    Correo Electrónico
+                </th>
+                <th>
+                    Contraseña
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Permisos
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCompletos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dni)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreDeUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Correo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contraseña)
+                    </td>
+                    <td>
+                        @if (item.Estado == 0)
+                        {
+                            <span>Inactivo</span>
+                        }
+                        else if (item.Estado == 1)
+                        {
+                            <span>Activo</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.PermisoInicial || item.PermisoPrimaria || item.PermisoSecundaria)
+                        {
+                            @if (item.PermisoInicial)
+                            {
+                                <a> Inicial </a>
+                            }
+                            @if (item.PermisoPrimaria)
+                            {
+                                <a> Primaria </a>
+                            }
+                            @if (item.PermisoSecundaria)
+                            {
+                                <a> Secundaria </a>
+                            }
+                        }
+                        else
+                        {
+                            <span>Sin Permisos</span>
+                        }
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> <!-- Ícono de edición -->
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark">
+                            <i class="fas fa-info-circle"></i> <!-- Ícono de detalles -->
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+ </main>
+    </div>
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tbl_usuarios').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                }
+            });
+        });
+    </script>
+}

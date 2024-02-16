@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creación de Cuentos</title>
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CrearCuentos.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos para las badges */
+        .custom-badge {
+            display: inline-block;
+            padding: 0.25em 0.5em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+        }
+
+        /* Estilos para diferentes colores de badge */
+        .custom-badge-primary {
+            background-color: #0078F0;
+            color: #fff;
+        }
+
+        .custom-badge-warning {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .custom-badge-dark {
+            background-color: #343a40;
+            color: #fff;
+        }
+    </style>
+    @await RenderSectionAsync("Estilos", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
+            <!-- Cambiado a navbar-expand-lg y ajustado la clase navbar -->
+            <div class="container-fluid">
+                <div>
+                    <a class="navbar-brand">
+                        <img src="~/IndexAssets/images/team3.png" alt="Logo" style="height: 65px; width: auto; margin-right: 20px;">
+                        <span style="margin-right: 10px;">Creación de Cuentos</span>
+                        @if (User.Claims.FirstOrDefault(c => c.Type == "PermisoInicial")?.Value == "True")
+                        {
+                            <span class="custom-badge custom-badge-primary">Inicial</span>
+                        }
+                        @if (User.Claims.FirstOrDefault(c => c.Type == "PermisoPrimaria")?.Value == "True")
+                        {
+                            <span class="custom-badge custom-badge-warning">Primaria</span>
+                        }
+                        @if (User.Claims.FirstOrDefault(c => c.Type == "PermisoSecundaria")?.Value == "True")
+                        {
+                            <span class="custom-badge custom-badge-dark">Secundaria</span>
+                        }
+                    </a>
+                </div>
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                            <i class="align-middle" data-feather="settings"></i>
+                        </a>
+
+
+                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                            <span class="text-dark">@User.Identity.Name</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" asp-controller="Sesion" asp-action="Salir">Cerrar Sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+@*    <div class="container">
+        <main role="main">*@
+
+            @RenderBody()
+@*        </main>
+    </div>*@
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Creación de Cuentos
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

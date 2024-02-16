@@ -1,0 +1,129 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Creación de Cuentos</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- STYLESHEET CSS FILES -->
+    <link rel="stylesheet" href="~/IndexAssets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/IndexAssets/css/animate.min.css">
+    <link rel="stylesheet" href="~/IndexAssets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/IndexAssets/css/nivo-lightbox.css">
+    <link rel="stylesheet" href="~/IndexAssets/css/nivo_themes/default/default.css">
+    <link rel="stylesheet" href="~/IndexAssets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+</head>
+<body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+    <!-- preloader section -->
+    <div class="preloader">
+        <div class="sk-spinner sk-spinner-rotating-plane"></div>
+    </div>
+    <!-- home section -->
+    <section id="home">
+        <div class="container" style="margin-top: 50px; padding-top: 20px;">
+            <div class="row">
+                <div class="col-md-6 col-sm-6" style="padding-right: 100px;">
+                    <div class="text-left">
+                        <h1 class="wow bounceInDown rotate text-center" style="color: #000; font-size: 8rem; margin-bottom: 10px; text-align: left;">
+                            <span>Creación de cuentos</span>
+                        </h1>
+                        <h2 style="color: #000; font-size: 35px; margin-bottom: 10px;">Con Inteligencia Artificial</h2>
+                        <p style="color: #000; font-size: 20px;">Descubre cómo la inteligencia<br />artificial agiliza tu tiempo con<br />estrategias creadas por profesionales</p>
+
+                        <div class="text-center" style="margin-top: 30px; margin-bottom:30px;">
+                            <!-- Para centrar el botón horizontalmente -->
+                            <a href="@Url.Action("Login", "Sesion")" class="btn btn-default smoothScroll" style="border-radius: 20px; font-size: large; margin-top: 20px; display: inline-block;"><b>Ingresar</b></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <img src="~/IndexAssets/images/home.png" alt="Imagen" class="img-responsive" style="border-radius: 50px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- team section -->
+    <section id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-6 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="text-center">
+                        <!-- Centra el contenido -->
+                        <img src="~/IndexAssets/images/team1.png" class="img-responsive" alt="Diploma" style="max-height: 250px; margin: 0 auto;"> <!-- Establece la altura máxima y centra la imagen horizontalmente -->
+                        <div class="team-des">
+                            <h3>¡Descubre tu potencial creativo! Nuestro software de generación de cuentos te brinda las herramientas necesarias para escribir historias sorprendentes. Obtén tu certificado de creatividad literaria y demuestra tu habilidad para crear mundos imaginarios y personajes inolvidables.</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="text-center">
+                        <!-- Centra el contenido -->
+                        <img src="~/IndexAssets/images/team2.png" class="img-responsive" alt="Cuento" style="max-height: 250px; margin: 0 auto;"> <!-- Establece la altura máxima y centra la imagen horizontalmente -->
+                        <div class="team-des">
+                            <h4>Crea cuentos totalmente personalizados</h4>
+                            <h3>Crea tu propia aventura literaria. Con nuestro software de generación de cuentos, puedes dar vida a historias únicas y personalizadas que reflejen tu imaginación y creatividad. ¡Explora mundos literarios ilimitados y convierte tus ideas en cuentos inolvidables!</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-6 wow fadeIn" data-wow-delay="0.7s">
+                    <div class="text-center">
+                        <!-- Centra el contenido -->
+                        <img src="~/IndexAssets/images/team3.png" class="img-responsive" alt="Diploma" style="max-height: 250px; margin: 0 auto;"> <!-- Establece la altura máxima y centra la imagen horizontalmente -->
+                        <div class="team-des">
+                            <h3>Nos enorgullece ser una institución líder en educación y creatividad. Nuestro software de generación de cuentos ha sido desarrollado en colaboración con expertos de esta prestigiosa institución. Juntos, estamos impulsando la narrativa creativa a nuevos horizontes.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 title">
+                    <h2>Contáctanos</h2>
+                    <hr>
+                    <p>¿Listo para desatar tu imaginación y comenzar a crear historias increíbles? ¡Contáctanos ahora y solicita acceso a nuestro software de generación de cuentos! Estamos aquí para responder a todas tus preguntas y ayudarte a comenzar tu viaje literario. Simplemente, llena el formulario a continuación con tu nombre y mensaje, y te contactaremos a través de WhatsApp en breve.</p>
+                </div>
+                <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 contact-form wow fadeInUp" data-wow-delay="0.3s">
+                    <form action="#" method="post">
+                        <input type="text" class="form-control" placeholder="Nombre">
+                        <textarea class="form-control" placeholder="Mensaje" rows="6"></textarea>
+                        <br>
+                        <div class="text-center">
+                            <!-- Agrega la clase text-center aquí -->
+                            <input type="submit" class="btn" style="width:200px; display: block; margin: 0 auto;" value="Contactar por WhatsApp">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="~/IndexAssets/js/jquery.js"></script>
+    <script src="~/IndexAssets/js/bootstrap.min.js"></script>
+    <script src="~/IndexAssets/js/nivo-lightbox.min.js"></script>
+    <script src="~/IndexAssets/js/smoothscroll.js"></script>
+    <script src="~/IndexAssets/js/jquery.sticky.js"></script>
+    <script src="~/IndexAssets/js/jquery.parallax.js"></script>
+    <script src="~/IndexAssets/js/wow.min.js"></script>
+    <script src="~/IndexAssets/js/custom.js"></script>
+</body>
+</html>
