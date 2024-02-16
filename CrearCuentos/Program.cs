@@ -38,8 +38,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseForwardedHeaders();
 //app.UseHttpsRedirection();
-app.UseStaticFiles();
-
+//app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions { RequestPath = "/" });
+app.UsePathBase("/");
 // Habilitar el uso de sesiones
 app.UseSession();
 
