@@ -43,8 +43,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 //app.UseHttpsRedirection();
-//app.UseStaticFiles();
-app.UseStaticFiles(new StaticFileOptions { RequestPath = "/" });
+app.UseStaticFiles();
+//app.UseStaticFiles(new StaticFileOptions { RequestPath = "/" });
 //app.UsePathBase("/");
 // Habilitar el uso de sesiones
 app.UseSession();
