@@ -114,7 +114,7 @@ namespace CrearCuentos.Controllers
             //string apiKey = "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";
             //string apiKey = "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";
             //string apiKey = "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";
-            string apiKey = "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";
+            string apiKey = "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";
             string answer = string.Empty;
 
             var openai = new OpenAIAPI(apiKey);
