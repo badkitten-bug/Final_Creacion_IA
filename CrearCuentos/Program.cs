@@ -45,7 +45,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 //app.UseHttpsRedirection();
 //app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions { RequestPath = "/" });
-app.UsePathBase("/");
+//app.UsePathBase("/");
 // Habilitar el uso de sesiones
 app.UseSession();
 
