@@ -2,6 +2,7 @@ using CrearCuentos.Models;
 using Microsoft.AspNetCore.Authentication.Cookies; // Añade este namespace para configurar la autenticación de cookies
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,7 +37,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseForwardedHeaders();
+//+app.UseForwardedHeaders();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 //app.UseHttpsRedirection();
 //app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions { RequestPath = "/" });
