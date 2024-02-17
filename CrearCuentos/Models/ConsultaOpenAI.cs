@@ -11,9 +11,14 @@ namespace CrearCuentos.Models
         public string NivelGrado { get; set; }
 
         [Required(ErrorMessage = "El campo Objetivo es obligatorio")]
-        public string Objetivo { get; set; }
+        public string CantidadPreguntas { get; set; }
 
         [Required(ErrorMessage = "El campo Objetivo es obligatorio")]
         public string Competencia { get; set; }
+
+        [Required(ErrorMessage = "El campo Objetivo es obligatorio")]
+        public string Area { get; set; }
+        [Required(ErrorMessage = "El campo Objetivo es obligatorio")]
+        public string TiempoSesion { get; set; }
     }
 }

@@ -84,6 +84,11 @@
                 <input asp-for="Competencia" class="form-control" />
                 <span asp-validation-for="Competencia" class="text-danger"></span>
             </div>
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="Area" style="margin-bottom:5px;"><b>Área</b></label>
+                <input asp-for="Area" class="form-control" />
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
 
             <div class="form-group" style="margin-bottom:15px;">
                 <label asp-for="NivelGrado" style="margin-bottom:5px;"><b>Nivel de Grado</b></label>
@@ -113,12 +118,16 @@
                 </select>
                 <span asp-validation-for="NivelGrado" class="text-danger"></span>
             </div>
-
+            <div class="form-group" style="margin-bottom:15px;">
+                <label asp-for="TiempoSesion" style="margin-bottom:5px;"><b>Tiempo de la Sesión</b></label>
+                <input asp-for="TiempoSesion" class="form-control" />
+                <span asp-validation-for="TiempoSesion" class="text-danger"></span>
+            </div>
 
             <div class="form-group" style="margin-bottom:15px;">
-                <label asp-for="Objetivo" style="margin-bottom:5px;"><b>Objetivo</b></label>
-                <input asp-for="Objetivo" class="form-control" />
-                <span asp-validation-for="Objetivo" class="text-danger"></span>
+                <label asp-for="CantidadPreguntas" style="margin-bottom:5px;"><b>Cantidad de Preguntas</b></label>
+                <input asp-for="CantidadPreguntas" class="form-control" />
+                <span asp-validation-for="CantidadPreguntas" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-secondary" style="margin-top:10px; background-color: #f2a938; border-color: #f2a938;">Generar Cuento</button>
@@ -133,10 +142,10 @@
     </div>
     <div id="derecha">
         <div id="botones">
-            <button id="btnMostrarResultado1" class="btn-secondary">Cuento</button>
-            <button id="btnMostrarResultado2" class="btn-secondary">Estrategias</button>
-            <button id="btnMostrarResultado3" class="btn-secondary">Preguntas</button>
-            <button id="btnExportar" class="btn-secondary" style="float: right;" ">Exportar</button>
+            <button id="btnMostrarResultado1" class="btn-dark btn-lg">Sesion De Aprendizaje</button>
+            <button id="btnMostrarResultado2" class="btn-dark btn-lg">Ficha de Aplicación</button>
+            <button id="btnMostrarResultado3" class="btn-dark btn-lg">Preguntas</button>
+            <button id="btnExportar" class="btn-dark btn-lg" style="float: right;" ">Exportar</button>
         </div>
         <textarea id="resultado" readonly>@System.Web.HttpUtility.HtmlDecode(ViewBag.Resultado)</textarea>
 

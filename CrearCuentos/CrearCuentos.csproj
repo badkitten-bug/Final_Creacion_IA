@@ -46,8 +46,6 @@
     <None Include="wwwroot\IndexAssets\images\portfolio-img8.jpg" />
     <None Include="wwwroot\IndexAssets\images\team-bg.jpg" />
     <None Include="wwwroot\IndexAssets\images\team1.png" />
-    <None Include="wwwroot\IndexAssets\images\team2.png" />
-    <None Include="wwwroot\IndexAssets\images\team3.png" />
     <None Include="wwwroot\IndexAssets\js\bootstrap.min.js" />
     <None Include="wwwroot\IndexAssets\js\custom.js" />
     <None Include="wwwroot\IndexAssets\js\jquery.js" />

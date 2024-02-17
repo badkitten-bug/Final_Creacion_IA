@@ -17,7 +17,7 @@ namespace CrearCuentos.Controllers
         public static string _EndPoint = "https://api.openai.com/";
         public static string _URI = "v1/chat/completions";
 
-        private readonly string apiKey = "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";
+        private readonly string apiKey = "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";
 
         public IActionResult Cuento()
         {
@@ -34,9 +34,9 @@ namespace CrearCuentos.Controllers
                 string resultado2 = "";
                 string resultado3 = "";
 
-                string prompt1 = $"Desarrolla un cuento sobre {modelo.Titulo}, para el {modelo.NivelGrado}. El objetivo es: {modelo.Objetivo} y la competencia es {modelo.Competencia}";
-                string prompt2 = $"Desarrollar estrategias 'Estrategias de entrada, Estrategias de Durante y Estrategias de salida' para el cuento: ";
-                string prompt3 = $"Crea 12 preguntas de comprensión de lectura con sus respectivas respuestas (para chicos de {modelo.NivelGrado}) sobre el cuento: ";
+                string prompt1 = $"Desarrolla una sesion de aprendizaje sobre {modelo.Titulo}, para el {modelo.NivelGrado}  y la competencia es {modelo.Competencia}";
+                string prompt2 = $"Desarrollar estrategias 'Estrategias de entrada, Estrategias de Durante y Estrategias de salida' para la sesión de aprendizaje: ";
+                string prompt3 = $"Crea {modelo.CantidadPreguntas} preguntas de comprensión de lectura con sus respectivas respuestas (para chicos de {modelo.NivelGrado}) sobre la sesion de aprendizaje: ";
 
 
                 resultado = Convert.ToString(consultarOpenAI(prompt1));
