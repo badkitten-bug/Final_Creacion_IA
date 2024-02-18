@@ -17,7 +17,7 @@ namespace CrearCuentos.Controllers
         public static string _EndPoint = "https://api.openai.com/";
         public static string _URI = "v1/chat/completions";
 
-        private readonly string apiKey = "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";
+        private readonly string apiKey = "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";
 
         public IActionResult Cuento()
         {
@@ -34,8 +34,8 @@ namespace CrearCuentos.Controllers
                 string resultado2 = "";
                 string resultado3 = "";
 
-                string prompt1 = $"Desarrolla una sesion de aprendizaje sobre {modelo.Titulo}, para el {modelo.NivelGrado}  y la competencia es {modelo.Competencia}";
-                string prompt2 = $"Desarrollar estrategias 'Estrategias de entrada, Estrategias de Durante y Estrategias de salida' para la sesión de aprendizaje: ";
+                string prompt1 = $"Desarrolla una sesion de aprendizaje sobre {modelo.Titulo}, genera el titulo del tema {modelo.Titulo}, la competencia {modelo.Competencia}, area del curso {modelo.Area}, tiempo de la sesion {modelo.TiempoSesion}, grado {modelo.NivelGrado}";
+                string prompt2 = $"Desarrollar Ficha de aplicacion sobre el {modelo.Titulo} que contenga 'Nombre del nino, edad, actividades durante la sesion, observaciones adicionales, comentarios adicionales,  firma del docente' ";
                 string prompt3 = $"Crea {modelo.CantidadPreguntas} preguntas de comprensión de lectura con sus respectivas respuestas (para chicos de {modelo.NivelGrado}) sobre la sesion de aprendizaje: ";
 
 
@@ -114,7 +114,7 @@ namespace CrearCuentos.Controllers
             //string apiKey = "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";
             //string apiKey = "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";
             //string apiKey = "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";
-            string apiKey = "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";
+            string apiKey = "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";
             string answer = string.Empty;
 
             var openai = new OpenAIAPI(apiKey);
